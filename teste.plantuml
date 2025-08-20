@@ -1,0 +1,57 @@
+@startuml
+
+class Usuario {
+  - id: int
+  - username: string
+  - email: string
+  - senha: string
+  + login(): void
+  + registrar(): void
+  + getFichas(): List<Ficha>
+}
+
+class Ficha {
+  - id: int
+  - idUsuario: int
+  - nome: string
+  - dataCriacao: Date
+  - sistema: Sistema_SDL
+  + editar(): void
+  + excluir(): void
+}
+
+class Sistema_SDL {
+  - id: int
+  - atributos: Atributos[]
+  - item: Item[]
+  - magia: Magia[]
+}
+
+class Atributos {
+  - id: string
+  - forca: int
+  - agilidade: int
+  - intelecto: int
+  - vontade: int
+}
+
+class Item {
+  - nome: string
+  - id: string
+  - quantidade: int
+  - descricao: string
+}
+
+class Magia {
+  - nome: string
+  - nivel: int
+  - descricao: string
+}
+
+Usuario "1" -- "0..*" Ficha : possui
+Ficha "1" -- "1" Sistema_SDL : usa
+Sistema_SDL "1" -- "0..*" Atributos : tem
+Sistema_SDL "1" -- "0..*" Item : possui
+Sistema_SDL "1" -- "0..*" Magia : possui
+
+@enduml
