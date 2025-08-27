@@ -1,0 +1,39 @@
+@startuml
+left to right direction
+
+actor "Usuário" as U
+
+rectangle "Sistema de Gerenciamento de Fichas" {
+  usecase "Registrar Conta" as UC_Registrar
+  usecase "Fazer Login" as UC_Login
+  usecase "Gerenciar Fichas" as UC_Gerenciar
+  usecase "Criar Ficha" as UC_Criar
+  usecase "Deletar Ficha" as UC_Deletar
+  usecase "Editar Ficha" as UC_Editar
+}
+
+rectangle "Conteúdo da Ficha" {
+  usecase "Escolher Sistema" as UC_EscolherSistema
+  usecase "Modificar Atributos" as UC_ModAtributos
+  usecase "Modificar Itens" as UC_ModItens
+  usecase "Modificar Magias" as UC_ModMagias
+  usecase "Modificar Habilidades" as UC_ModHabilidades
+}
+
+U -- UC_Registrar
+U -- UC_Login
+
+UC_Login --> UC_Gerenciar : include
+
+UC_Gerenciar --|> UC_Criar
+UC_Gerenciar --|> UC_Deletar
+UC_Gerenciar --|> UC_Editar
+
+UC_Criar ..> UC_EscolherSistema : include
+UC_EscolherSistema ..> UC_Editar : extend
+UC_Editar ..> UC_ModAtributos : include
+UC_Editar ..> UC_ModItens : include
+UC_Editar ..> UC_ModMagias : include
+UC_Editar ..> UC_ModHabilidades : include
+
+@enduml

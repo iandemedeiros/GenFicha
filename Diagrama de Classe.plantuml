@@ -1,0 +1,99 @@
+@startuml
+
+title Diagrama de Classes - Sistema de Fichas de RPG
+
+' Agrupamento de classes de usuário e ficha
+class Usuario {
+  - id: int
+  - nome: string
+  - email: string
+  - senha: string
+  + registrar()
+  + logar()
+  + criarFicha()
+  + editarFicha()
+  + deletarFicha()
+}
+
+class Ficha {
+  - id: int
+  - idUsuario: int
+  - dataCriacao: date
+  - idSistema: int
+}
+
+' Agrupamento de classes de sistema e características
+class Sistema {
+  - id: int
+  - nome: string
+}
+
+class Atributo {
+  - id: int
+  - nome: string
+  - descricao: string
+}
+
+class Item {
+  - id: int
+  - nome: string
+  - descricao: string
+  -idAtributo: int
+}
+
+class Magia {
+  - id: int
+  - nome: string
+  - descricao: string
+}
+
+class Habilidade {
+  - id: int
+  - nome: string
+  - descricao: string
+}
+
+' Agrupamento de classes de associação
+class SistemaAtributo {
+  - id: int
+  - idSistema: int
+  - idAtributo: int
+}
+
+class SistemaItem {
+  - id: int
+  - idSistema: int
+  - idItem: int
+}
+
+class SistemaMagia {
+  - id: int
+  - idSistema: int
+  - idMagia: int
+}
+
+class SistemaHabilidade {
+  - id: int
+  - idSistema: int
+  - idHabilidade: int
+}
+
+' Definição das relações
+Usuario "1" -- "0..*" Ficha : possui >
+Sistema "1" -- "0..*" Ficha : define >
+
+' Relacionamentos entre Sistema e as classes de características (via classes de associação)
+Sistema "1" -- "0..*" SistemaAtributo
+SistemaAtributo "0..*" -- "1" Atributo
+
+Sistema "1" -- "0..*" SistemaItem
+SistemaItem "0..*" -- "1" Item
+
+Sistema "1" -- "0..*" SistemaMagia
+SistemaMagia "0..*" -- "1" Magia
+
+Sistema "1" -- "0..*" SistemaHabilidade
+SistemaHabilidade "0..*" -- "1" Habilidade
+Item "1" -- "0..*" Atributo
+
+@enduml
