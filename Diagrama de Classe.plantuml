@@ -26,13 +26,10 @@ class Ficha {
 class Sistema {
   - id: int
   - nome: string
+  - pdf: string
 }
 
-class Atributo {
-  - id: int
-  - nome: string
-  - descricao: string
-}
+
 
 class Item {
   - id: int
@@ -53,12 +50,7 @@ class Habilidade {
   - descricao: string
 }
 
-' Agrupamento de classes de associação
-class SistemaAtributo {
-  - id: int
-  - idSistema: int
-  - idAtributo: int
-}
+
 
 class SistemaItem {
   - id: int
@@ -83,8 +75,7 @@ Usuario "1" -- "0..*" Ficha : possui >
 Sistema "1" -- "0..*" Ficha : define >
 
 ' Relacionamentos entre Sistema e as classes de características (via classes de associação)
-Sistema "1" -- "0..*" SistemaAtributo
-SistemaAtributo "0..*" -- "1" Atributo
+
 
 Sistema "1" -- "0..*" SistemaItem
 SistemaItem "0..*" -- "1" Item
@@ -94,6 +85,6 @@ SistemaMagia "0..*" -- "1" Magia
 
 Sistema "1" -- "0..*" SistemaHabilidade
 SistemaHabilidade "0..*" -- "1" Habilidade
-Item "1" -- "0..*" Atributo
+
 
 @enduml
